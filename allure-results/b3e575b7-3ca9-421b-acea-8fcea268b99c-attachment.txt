@@ -1,0 +1,5 @@
+An error has occured and a screenshot has been taken.
+Removed the banner.
+Successfully logged in.
+locator('.woocommerce-mini-cart__empty-message')
+Removed all items from the cart.

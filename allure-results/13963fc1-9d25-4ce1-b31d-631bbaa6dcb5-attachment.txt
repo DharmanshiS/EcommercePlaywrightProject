@@ -1,0 +1,5 @@
+Removed the banner.
+Successfully logged in.
+An error has occured and a screenshot has been taken.
+Successfully logged out.
+Removed all items from the cart.

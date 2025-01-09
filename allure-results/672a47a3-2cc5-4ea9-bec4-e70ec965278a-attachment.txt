@@ -1,0 +1,14 @@
+Removed the banner.
+Successfully logged in.
+locator('.woocommerce-mini-cart__empty-message')
+the text is No products in the cart.
+Cart is already empty.
+
+TEST CASE 1
+
+Added 'Beanie' to the cart.
+Successfully added the coupon code.
+£2.70
+The discount is 2.7 and the expected discount is 2.6999999999999997.
+The total is 19.25 and the expected total is 19.25.
+Successfully logged out.

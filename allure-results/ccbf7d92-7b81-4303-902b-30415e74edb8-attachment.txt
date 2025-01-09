@@ -1,0 +1,12 @@
+Removed the banner.
+Successfully logged in.
+Cart is already empty.
+
+TEST CASE 1
+
+Added 'Beanie' to the cart.
+Successfully added the coupon code.
+£5.40
+The discount is 5.4 and the expected discount is 5.3999999999999995.
+The total is 34.55 and the expected total is 34.550000000000004.
+Successfully logged out.

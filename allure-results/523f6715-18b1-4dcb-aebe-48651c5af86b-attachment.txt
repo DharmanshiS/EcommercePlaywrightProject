@@ -1,0 +1,13 @@
+Removed the banner.
+Successfully logged in.
+
+TEST CASE 2
+
+Successfully pressed 'checkout'.
+The details that are entered from the JSON file are: [object Object]
+Successfully filled in the billing details.
+Successfully placed the order.
+Successfully captured the order number 15330 on the Order Received page.
+Successfully navigated to the Orders page.
+The order number given at Order Received matches with My Orders: 15330.
+Successfully logged out.
