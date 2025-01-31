@@ -1,4 +1,5 @@
 import { test, expect } from './fixtures/fixtures';
+import * as fs from 'fs';
 
 import { CartPage } from './POM/CartPage';
 import { ShopPage } from './POM/ShopPage';
@@ -23,15 +24,17 @@ test('Coupon is applied successfully', async ({ loggedInPage }) => {
     await shopPage.goToCart();
 
     // Apply the coupon
+    const { coupon, discount } = JSON.parse(fs.readFileSync('./tests/data/coupons.json', 'utf-8'));
+
     const cartPage = new CartPage(loggedInPage);
-    await cartPage.addCoupon('edgewords');
+    await cartPage.addCoupon(coupon);
     console.log("Successfully added the coupon code.");
     
     // Validate the discount is correctly applied
     const subtotal = await cartPage.getCartSubtotal();
-    const discount = await cartPage.getCartTotalCouponDiscount('edgewords');
-    const expectedDiscount = parseFloat((subtotal * 0.15).toFixed(2)); // 15% discount, rounded to 2dp
-    const actualDiscount = parseFloat(discount.toFixed(2)); // Round actual discount to 2dp
+    const discountFound = await cartPage.getCartTotalCouponDiscount(coupon);
+    const expectedDiscount = parseFloat((subtotal * (discount / 100)).toFixed(2)); // 15% discount, rounded to 2dp
+    const actualDiscount = parseFloat(discountFound.toFixed(2)); // Round actual discount to 2dp
 
     expect(actualDiscount).toEqual(expectedDiscount);  
     console.log(`The discount is ${actualDiscount} and the expected discount is ${expectedDiscount}.`)
