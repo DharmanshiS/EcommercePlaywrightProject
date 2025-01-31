@@ -1,21 +1,14 @@
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './base-pom';
 
-export class ShopPage {
+export class ShopPage extends BasePage {
 
     // Fields
-    page: Page;
-
-    constructor(page: Page) {
-        this.page = page;
-    }
+    readonly viewCart = this.page.getByTitle('View cart'); // locator(`a[title='View cart']`);
 
     // Locators
     private addToCart(product: string): Locator {
         return this.page.locator(`a[aria-label='Add “${product}” to your cart']`);
-    }
-
-    private viewCartFromProduct(): Locator {
-        return this.page.locator(`a[title='View cart']`);
     }
 
     // Service Methods
@@ -24,6 +17,6 @@ export class ShopPage {
     }
 
     async goToCart(): Promise<void> {
-        await this.viewCartFromProduct().click();
+        await this.viewCart.click();
     }
 }

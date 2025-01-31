@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { ShopPage } from './ShopPage';
 
 export class NavigationBar {
 
@@ -24,8 +25,9 @@ export class NavigationBar {
     }
 
     // Service Methods
-    async navigateToShop(): Promise<void> {
+    async navigateToShop(): Promise<ShopPage> {
         await this.shopNavigation.click();
+        return new ShopPage(this.page);
     }
 
     async navigateToOrders(): Promise<void> {
