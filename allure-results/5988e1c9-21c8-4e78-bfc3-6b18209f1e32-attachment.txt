@@ -1,0 +1,9 @@
+Removed the banner.
+Successfully logged in.
+
+TEST CASE 2
+
+Successfully pressed 'checkout'.
+The details that are entered from the JSON file are: [object Object]
+An error occurred and a screenshot was taken.
+Successfully logged out.

@@ -1,0 +1,9 @@
+Removed the banner.
+Successfully logged in.
+
+TEST CASE 1
+
+Added 'Beanie' to the cart.
+Successfully added the coupon code.
+An error occurred and a screenshot was taken.
+Successfully logged out.

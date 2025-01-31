@@ -2,6 +2,8 @@ import { test as base, expect, Page, TestInfo } from '@playwright/test';
 import { AccountPage } from '../POM/AccountPage';
 import { LoginPage } from '../POM/LoginPage';
 import { NavigationBar } from '../POM/NavigationBar';
+import * as dotenv from 'dotenv';
+dotenv.config(); // Load variables from .env file
 
 type MyFixtures = {
   loggedInPage: Page;
@@ -16,7 +18,7 @@ const test = base.extend<MyFixtures>({
     await loginPage.clickDismiss(); // Remove the warning
     console.log("Removed the banner.");
 
-    await loginPage.login('d@nfocus.co.uk', 'mystrongpassword!');
+    await loginPage.login(process.env.TEST_USERNAME || '', process.env.TEST_PASSWORD || '');
     const accountPage = new AccountPage(page);
     await expect(accountPage.accountTitle).toContainText('My account');
     console.log("Successfully logged in.");
