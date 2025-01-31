@@ -15,6 +15,6 @@ export class AccountPage {
 
     // Service methods
     async getAccountTitle() {
-        return await this.accountTitle;
+        return this.accountTitle;
     }
 }
