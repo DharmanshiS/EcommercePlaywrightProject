@@ -19,7 +19,6 @@ const test = base.extend<MyFixtures>({
     const loginPage = new LoginPage(page);
     await loginPage.clickDismiss(); // Remove the warning
     
-    console.log(process.env.USERNAME || '');
     await loginPage.login(process.env.SITE_USERNAME || '', process.env.SITE_PASSWORD || '');
     const accountPage = new AccountPage(page);
     await expect(accountPage.accountTitle).toContainText('My account');

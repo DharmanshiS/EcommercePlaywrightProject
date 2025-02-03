@@ -22,7 +22,6 @@ export class LoginPage extends BasePage {
     }
 
     async login(username: string, password: string): Promise<void> {
-        console.log(username);
         await this.setUsername(username);
         await this.setPassword(password);
         await this.submitForm();
