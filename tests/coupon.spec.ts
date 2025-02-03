@@ -14,7 +14,7 @@ test('Coupon is applied successfully', async ({ loggedInNav }) => {
     await shopPage.goToCart();
 
     // Apply the coupon
-    const coupon: Coupon  = JSON.parse(fs.readFileSync('../data/coupons.json', 'utf-8'));
+    const coupon: Coupon  = JSON.parse(fs.readFileSync('data/coupons.json', 'utf-8'));
 
     const cartPage = new CartPage(loggedInNav.page);
     await cartPage.addCoupon(coupon.title);
@@ -22,19 +22,19 @@ test('Coupon is applied successfully', async ({ loggedInNav }) => {
     // Validate the discount is correctly applied
     const subtotal = await cartPage.getCartSubtotal();
     const discountFound = await cartPage.getCartTotalCouponDiscount(coupon.title);
-    const expectedDiscount = parseFloat((subtotal * (coupon.discount / 100)).toFixed(2)); // 15% discount, rounded to 2dp
-    const actualDiscount = parseFloat(discountFound.toFixed(2)); // Round actual discount to 2dp
+    const expectedDiscount = parseFloat((subtotal * ((100 - coupon.discount) / 100)).toFixed(2)); // 15% discount, rounded to 2dp
+    const actualDiscount = parseFloat((subtotal - discountFound).toFixed(2)); // Round actual discount to 2dp
 
-    expect(actualDiscount, `The discount is ${actualDiscount} and the expected discount is ${expectedDiscount}.`).toEqual(expectedDiscount);  
+    expect(actualDiscount, `The discount is ${actualDiscount} and the expected discount is ${expectedDiscount}.`).toBe(expectedDiscount);  
 
     // Validate the total cost
     const totalCost = await cartPage.getCartTotal();
     const roundedCost = parseFloat(totalCost.toFixed(2));
 
     const shipping = await cartPage.getCartTotalShipping();
-    const expectedTotal = parseFloat((subtotal + shipping - coupon.discount).toFixed(2));
+    const expectedTotal = parseFloat((expectedDiscount + shipping).toFixed(2));
 
-    expect(roundedCost, `The total is ${roundedCost} and the expected total is ${expectedTotal}.`).toEqual(expectedTotal);  
+    expect(roundedCost, `The total is ${roundedCost} and the expected total is ${expectedTotal}.`).toBe(expectedTotal);  
 });
 
 

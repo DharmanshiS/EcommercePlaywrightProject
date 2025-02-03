@@ -7,7 +7,9 @@ export class NavigationBar extends BasePage {
 
     // Fields
     shopNavigation = this.page.locator('#menu-item-43 > a');
-    logoutNavigation = this.page.locator('li[class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout"] a');
+    logoutNavigation = this.page.locator('#post-7 > div > div > div > p:nth-child(2) > a');
+    
+
     ordersNavigation = this.page.locator('li[class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders"] a');
     myAccountNavigation = this.page.locator('#menu-item-46 > a');
     cartSymbol = this.page.locator('#site-header-cart > li:nth-child(1) > a');

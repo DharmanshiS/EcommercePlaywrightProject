@@ -18,12 +18,11 @@ const test = base.extend<MyFixtures>({
     // Login
     const loginPage = new LoginPage(page);
     await loginPage.clickDismiss(); // Remove the warning
-    console.log("Removed the banner.");
-
-    await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
+    
+    console.log(process.env.USERNAME || '');
+    await loginPage.login(process.env.SITE_USERNAME || '', process.env.SITE_PASSWORD || '');
     const accountPage = new AccountPage(page);
     await expect(accountPage.accountTitle).toContainText('My account');
-    console.log("Successfully logged in.");
 
     const navBar = new NavigationBar(page);
     await use(navBar);  // Run the test

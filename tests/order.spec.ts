@@ -19,7 +19,7 @@ test('Place an Order', async ({ loggedInNav }) => {
     await cartPage.checkout();
 
     // Fill in the billing details
-    const billingdetails: BillingDetails = JSON.parse(fs.readFileSync('../data/billing-details.json', 'utf-8'));
+    const billingdetails: BillingDetails = JSON.parse(fs.readFileSync('data/billing-details.json', 'utf-8'));
     
     const checkoutPage = new CheckoutPage(loggedInNav.page);
     await checkoutPage.fillBillingDetails(billingdetails.firstname, billingdetails.lastname, billingdetails.street, billingdetails.city, billingdetails.postcode, billingdetails.phone);
