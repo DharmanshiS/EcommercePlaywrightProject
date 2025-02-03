@@ -1,7 +1,0 @@
-Removed the banner.
-Successfully logged in.
-
-TEST CASE 2
-
-An error has occured and a screenshot has been taken.
-Successfully logged out.

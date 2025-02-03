@@ -1,3 +1,0 @@
-An error has occured and a screenshot has been taken.
-Removed the banner.
-Successfully logged in.
