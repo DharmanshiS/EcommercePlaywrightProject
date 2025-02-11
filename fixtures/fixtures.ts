@@ -1,4 +1,4 @@
-import { test as base, expect, Page, TestInfo } from '@playwright/test';
+import { test as base, expect, TestInfo } from '@playwright/test';
 import { AccountPage } from '../pom/account-page';
 import { LoginPage } from '../pom/login-page';
 import { NavigationBar } from '../pom/navigation-bar';
@@ -6,20 +6,40 @@ import * as dotenv from 'dotenv';
 
 dotenv.config(); // Load variables from .env file
 
+
+type LoginOptions = {
+  username?: string; // Optionally override username
+  password?: string; // Optionally override password
+  dismissWarning?: boolean; // Optionally dismiss warnings
+};
+
 type MyFixtures = {
   loggedInNav: NavigationBar;
 };
 
-const test = base.extend<MyFixtures>({
-  loggedInNav: async ({ page }, use, testInfo: TestInfo) => {
+const test = base.extend<MyFixtures & {loginOptions: LoginOptions}>({
+  loginOptions: [
+    {
+      username: process.env.SITE_USERNAME || "",
+      password: process.env.SITE_PASSWORD || "",
+      dismissWarning: true,
+    },
+    {
+      option: true
+    },
+  ],
+  
+  loggedInNav: async ({ page, loginOptions }, use, testInfo: TestInfo) => {
     const siteUrl = process.env.SITE_URL ?? 'https://www.edgewordstraining.co.uk/demo-site/my-account/';
     await page.goto(siteUrl);
 
     // Login
     const loginPage = new LoginPage(page);
-    await loginPage.clickDismiss(); // Remove the warning
+    if (loginOptions.dismissWarning){
+      await loginPage.clickDismiss(); // Remove the warning
+    }
     
-    await loginPage.login(process.env.SITE_USERNAME || '', process.env.SITE_PASSWORD || '');
+    await loginPage.login(loginOptions?.username ?? process.env.SITE_USERNAME ?? '', loginOptions?.password ?? process.env.SITE_PASSWORD ?? '');
     const accountPage = new AccountPage(page);
     await expect(accountPage.accountTitle).toContainText('My account');
 
